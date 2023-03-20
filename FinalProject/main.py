@@ -90,7 +90,7 @@ if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     total_episode = 500
-    lr = 0.01
+    lr = 0.0005
     gamma = 0.99
     target_replace_count = 400
     epsilon_decrease = 2.5e-06
