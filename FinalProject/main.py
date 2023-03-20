@@ -8,6 +8,7 @@ import torch
 import gymnasium as gym
 
 import DQN
+import DDQN
 
 def set_seed(seed):
     torch.manual_seed(seed)
@@ -26,7 +27,7 @@ def train(lr, gamma, target_replace_count, epsilon_decrease, experience_size=100
     set_seed(seed)
     episode_rewards = []
     
-    agent = DQN.DQNAgent(input_channel=3, input_size=(84, 84), action_size=env.action_space.n, lr=lr, gamma=gamma, batch_size=batch_size, experience_size=experience_size, target_replace_count=target_replace_count, epsilon=1, epsilon_final=0.01, epsilon_decrease=epsilon_decrease, device=device)
+    agent = DDQN.DDQNAgent(input_channel=3, input_size=(84, 84), action_size=env.action_space.n, lr=lr, gamma=gamma, batch_size=batch_size, experience_size=experience_size, target_replace_count=target_replace_count, epsilon=1, epsilon_final=0.01, epsilon_decrease=epsilon_decrease, device=device)
     
     episode = 0
     start_episode = time.perf_counter()

@@ -8,7 +8,7 @@ import numpy as np
 
 from NN import Network
 
-class DQNAgent():
+class DDQNAgent():
 
     def __init__(self, input_channel, input_size, action_size, lr=0.00025, gamma=0.99, batch_size=32, experience_size=10000, target_replace_count=100, epsilon=1.0, epsilon_final=0.1, epsilon_decrease=2e-6, device="cpu"):
 
