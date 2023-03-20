@@ -22,7 +22,7 @@ class Network(nn.Module):
         x = F.relu(self.conv3(x))
         x = torch.flatten(x , 1)
         x = F.relu(self.line1(x))
-        output = self.line1(2)
+        output = self.line1(x)
 
         return output
     
@@ -32,6 +32,6 @@ class Network(nn.Module):
         x = F.relu(self.conv3(x))
         x = torch.flatten(x , 1)
         x = F.relu(self.line1(x))
-        output = self.line1(2)
+        output = self.line2(x)
 
         return torch.max(output, dim=1)[0]
