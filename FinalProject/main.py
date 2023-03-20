@@ -17,7 +17,7 @@ def set_seed(seed):
 def scale_image(image):
     image_gray = image[:-12, 6:-6, :]
     image_gray = image_gray.astype(np.float32) / 255
-    return np.expand_dims(image_gray, axis=0)
+    return np.moveaxis(image_gray, -1, 0)
 
 
 def train(lr, gamma, target_replace_count, epsilon_decrease, experience_size=10000, batch_size=32, device="cpu", seed=0, total_step=1000, total_episode=-1, model="DQN", base="./"):
