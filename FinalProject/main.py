@@ -18,7 +18,7 @@ def set_seed(seed):
 def scale_image(image):
     image_rescaled = image[6:-6, 6:-6, :]
     image_gray = cv2.cvtColor(image_rescaled, cv2.COLOR_RGB2GRAY)
-    image_gray = image_gray.astype(float) / 255
+    image_gray = image_gray.astype(np.float32) / 255
     return np.expand_dims(image_gray, axis=0)
 
 
