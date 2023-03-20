@@ -28,7 +28,7 @@ def train(lr, gamma, target_replace_count, epsilon_decrease, experience_size=100
     set_seed(seed)
     episode_rewards = []
     
-    agent = DQN.DQNAgent(input_channel=1, input_size=(84, 84), action_size=env.action_space.n, lr=lr, gamma=gamma, batch_size=batch_size, experience_size=experience_size, target_replace_count=target_replace_count, epsilon=1, epsilon_final=0.1, epsilon_decrease=epsilon_decrease, device=device)
+    agent = DQN.DQNAgent(input_channel=1, input_size=(84, 84), action_size=env.action_space.n, lr=lr, gamma=gamma, batch_size=batch_size, experience_size=experience_size, target_replace_count=target_replace_count, epsilon=1, epsilon_final=0.01, epsilon_decrease=epsilon_decrease, device=device)
     
     episode = 0
     start_episode = time.perf_counter()
@@ -69,8 +69,8 @@ def train(lr, gamma, target_replace_count, epsilon_decrease, experience_size=100
 
         episode_rewards.append(cumulative_reward)
 
-        if episode % 100 == 0:
-            average_reward = np.array(episode_rewards[-100:]).mean()
+        if episode % 50 == 0:
+            average_reward = np.array(episode_rewards[-50:]).mean()
             now = time.perf_counter()
             print(f"episode: {episode}, average reward: {average_reward}, epsilon: {agent.epsilon}, took: {round(now - start_episode, 3)}, in_total: {round(now - start_total, 3)}")
             start_episode = now
@@ -78,11 +78,11 @@ def train(lr, gamma, target_replace_count, epsilon_decrease, experience_size=100
         episode += 1
 
     # print for last episode
-    average_reward = np.mean(epsidoe_rewards[-100:])
+    average_reward = np.mean(episode_rewards[-50:])
     now = time.perf_counter()
     print(f"episode: {episode}, average reward: {average_reward}, epsilon: {agent.epsilon}, took: {round(now - start_episode, 3)}, in_total: {round(now - start_total, 3)}")
 
-    agent.save_model(base)
+    # agent.save_model(base)
     env.close()
 
     return episode_rewards, now - start_total
@@ -90,10 +90,9 @@ def train(lr, gamma, target_replace_count, epsilon_decrease, experience_size=100
 if __name__ == "__main__":
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    # device = "mps" if torch.backends.mps.is_available() else "cpu"
 
-    total_episode = 700
-    lr = 0.00025
+    total_episode = 1000
+    lr = 0.01
     gamma = 0.99
     target_replace_count = 400
     epsilon_decrease = 2.5e-05
