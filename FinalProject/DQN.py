@@ -34,7 +34,7 @@ class DQNAgent():
         self.DQN = Network(self.input_channel, self.input_size, self.action_size).to(self.device)
         self.target_DQN = Network(self.input_channel, self.input_size, self.action_size).to(self.device)
         self.loss_fn = nn.MSELoss()
-        self.optimizer = optim.RMSprop(self.DQN.parameters(), lr=self.lr)
+        self.optimizer = optim.Adam(self.DQN.parameters(), lr=self.lr)
 
     def get_action(self, state):
         probability = np.random.random()
@@ -42,7 +42,7 @@ class DQNAgent():
         if probability < self.epsilon:
             return np.random.randint(self.action_size)
         else:
-            state = torch.tensor(state).to(self.device)
+            state = torch.tensor(state).to(self.device).unsqueeze_(0)
             action = torch.argmax(self.DQN(state)).item()
 
             return action

@@ -37,7 +37,6 @@ def train(lr, gamma, target_replace_count, epsilon_decrease, experience_size=100
     print(f"Start training {model} with lr: {lr}, gamma: {gamma}, replace_count: {target_replace_count}, epsilon_dec: {epsilon_decrease}")
 
     while True:
-
         if total_episode < 0:
             if (len(episode_rewards) > 100 and np.mean(episode_rewards[-100:]) >= 50):
                 break
@@ -90,7 +89,7 @@ def train(lr, gamma, target_replace_count, epsilon_decrease, experience_size=100
 
 if __name__ == "__main__":
     
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # device = "mps" if torch.backends.mps.is_available() else "cpu"
 
     total_episode = 700
