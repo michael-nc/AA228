@@ -5,7 +5,6 @@ import random
 
 import numpy as np
 import torch
-import cv2
 import gymnasium as gym
 
 import DQN
@@ -16,8 +15,7 @@ def set_seed(seed):
     np.random.seed(seed)
 
 def scale_image(image):
-    image_rescaled = image[6:-6, 6:-6, :]
-    image_gray = cv2.cvtColor(image_rescaled, cv2.COLOR_RGB2GRAY)
+    image_gray = image[:-12, 6:-6, 1]
     image_gray = image_gray.astype(np.float32) / 255
     return np.expand_dims(image_gray, axis=0)
 
@@ -95,7 +93,7 @@ if __name__ == "__main__":
     lr = 0.01
     gamma = 0.99
     target_replace_count = 400
-    epsilon_decrease = 2.5e-05
+    epsilon_decrease = 2.5e-06
     episode_reward, total_time = train(lr=lr, gamma=gamma, target_replace_count=target_replace_count, epsilon_decrease=epsilon_decrease, device=device, total_episode=total_episode)
     
     print(f"Training DQN for {total_episode} episodes took {round(total_time, 3)} secs")
