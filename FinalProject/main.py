@@ -95,7 +95,7 @@ if __name__ == "__main__":
     target_replace_count = 400
     epsilon_decrease = 2.5e-06
     episode_reward, total_time = train(lr=lr, gamma=gamma, target_replace_count=target_replace_count, epsilon_decrease=epsilon_decrease, device=device, total_episode=total_episode)
-    
+            
     print(f"Training DQN for {total_episode} episodes took {round(total_time, 3)} secs")
     with open("DQN_reward.npy", "wb") as f:
         np.save(f, np.array(episode_reward))
