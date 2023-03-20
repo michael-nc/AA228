@@ -15,7 +15,7 @@ def set_seed(seed):
     np.random.seed(seed)
 
 def scale_image(image):
-    image_gray = image[:-12, 6:-6, 1]
+    image_gray = image[:-12, 6:-6, :]
     image_gray = image_gray.astype(np.float32) / 255
     return np.expand_dims(image_gray, axis=0)
 
@@ -26,7 +26,7 @@ def train(lr, gamma, target_replace_count, epsilon_decrease, experience_size=100
     set_seed(seed)
     episode_rewards = []
     
-    agent = DQN.DQNAgent(input_channel=1, input_size=(84, 84), action_size=env.action_space.n, lr=lr, gamma=gamma, batch_size=batch_size, experience_size=experience_size, target_replace_count=target_replace_count, epsilon=1, epsilon_final=0.01, epsilon_decrease=epsilon_decrease, device=device)
+    agent = DQN.DQNAgent(input_channel=3, input_size=(84, 84), action_size=env.action_space.n, lr=lr, gamma=gamma, batch_size=batch_size, experience_size=experience_size, target_replace_count=target_replace_count, epsilon=1, epsilon_final=0.01, epsilon_decrease=epsilon_decrease, device=device)
     
     episode = 0
     start_episode = time.perf_counter()
