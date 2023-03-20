@@ -35,6 +35,7 @@ class DDQNAgent():
         self.target_DDQN = Network(self.input_channel, self.input_size, self.action_size).to(self.device)
         self.loss_fn = nn.MSELoss()
         self.optimizer = optim.Adam(self.DDQN.parameters(), lr=self.lr)
+        print("Initializing {self.model_name}!")
 
     def get_action(self, state):
         probability = np.random.random()

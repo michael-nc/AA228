@@ -21,7 +21,7 @@ def scale_image(image):
     return np.moveaxis(image_gray, -1, 0)
 
 
-def train(lr, gamma, target_replace_count, epsilon_decrease, experience_size=10000, batch_size=32, device="cpu", seed=0, total_step=1000, total_episode=-1, model="DQN", base="./"):
+def train(lr, gamma, target_replace_count, epsilon_decrease, experience_size=10000, batch_size=32, device="cpu", seed=0, total_step=1000, total_episode=-1, model="DDQN", base="./"):
 
     env = gym.make("CarRacing-v2", continuous=False)
     set_seed(seed)
